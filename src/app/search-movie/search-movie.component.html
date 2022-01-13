@@ -21,7 +21,7 @@
       <label for="release" formControlName="release">Année de sortie:</label>
       <input id="release" type="number" formControlName="release"/>
     </div>
-    <div *ngIf="f['identifierAndTitle']?.get('identifier')?.value">
+    <div *ngIf="f['identifierTitle']?.get('identifier')?.value">
       <label for="fiche" formControlName="fiche">Fiche:</label>
       <select id="fiche" name ="fiche" formControlName="fiche">
         <option>complète</option>
