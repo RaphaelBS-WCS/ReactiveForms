@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="searchForm" #myForm="ngForm">
+    <h1>Search Movie</h1>
+    <div formGroupName="identifierTitle">
+      <label for="identifier">Identifiant:</label>
+      <input id="identifier" type="text" formControlName="identifier"/>
+      <label for="title">Titre:</label>
+      <input id="title" type="text" formControlName="title"/>
+    </div>
+    <div *ngIf="myForm.submitted && f['identifierTitle']?.errors['isRequired']">
+      Au moins l'un des deux champs est requis.
+    </div>
+    <div>
+      <label for="type" formControlName="type">Type:</label>
+      <select id="type" formControlName="type">
+        <option value="film">film</option>
+        <option value="épisode">épisode</option>
+        <option value="série">série</option>
+      </select>
+    </div>
+    <div>
+      <label for="release" formControlName="release">Année de sortie:</label>
+      <input id="release" type="number" formControlName="release"/>
+    </div>
+    <div *ngIf="f['identifierAndTitle']?.get('identifier')?.value">
+      <label for="fiche" formControlName="fiche">Fiche:</label>
+      <select id="fiche" name ="fiche" formControlName="fiche">
+        <option>complète</option>
+        <option>courte</option>
+      </select>
+    </div>
+    <div *ngIf="myForm.submitted && f['release'].errors['required']">
+      Le champs Année de sortie est requis.
+    </div>
+    <div *ngIf="myForm.submitted && f['release'].errors['min']">
+      L'année doit être comprise entre
+      {{ myForm.submitted && f['release'].errors['min'].minYearRequired }}
+      et
+      {{ myForm.submitted && f['release'].errors['min'].maxYearRequired }}.
+    </div>
+    <button type="submit">Rechercher</button>
+    <button type="reset">reset</button>
+</form>
